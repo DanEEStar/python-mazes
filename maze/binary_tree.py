@@ -1,7 +1,7 @@
 from random import choice
 from grid import Grid, grid_to_img
 
-def binary_tree_maze(grid):
+def binary_tree_maze_iterator(grid):
   for cell in grid.each_cell():
     neighbors = []
     if cell.north:
@@ -12,6 +12,12 @@ def binary_tree_maze(grid):
     if len(neighbors) > 0:
       neighbor = choice(neighbors)
       cell.link(neighbor)
+      yield grid
+  return grid
+  
+def binary_tree_maze(grid):
+  for grid in binary_tree_maze_iterator(grid):
+    pass
   return grid
 
 

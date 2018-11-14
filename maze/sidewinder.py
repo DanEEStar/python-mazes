@@ -1,7 +1,7 @@
 from random import choice, randint
 from grid import Grid, grid_to_img
 
-def sidewinder_maze(grid):
+def sidewinder_maze_iterator(grid):
   run = []
   for cell in grid.each_cell():
     run.append(cell)
@@ -19,7 +19,13 @@ def sidewinder_maze(grid):
       run = []
     else:
       cell.link(cell.east)
+    yield grid
     
+  return grid
+  
+def sidewinder_maze(grid):
+  for grid in sidewinder_maze_iterator(grid):
+    pass
   return grid
 
 

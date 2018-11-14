@@ -19,7 +19,6 @@ def dijkstra_iterator(cell):
     
     
 def depth_first_iterator(cell, visited=None):
-  yield cell
   if visited is None:
     visited = {cell}
 
@@ -28,6 +27,7 @@ def depth_first_iterator(cell, visited=None):
       continue
     
     visited.add(link)
+    yield cell, link
     yield from depth_first_iterator(link, visited)
 
 
@@ -108,7 +108,8 @@ class GridTestCase(unittest.TestCase):
     img = grid_to_img_color_distances(grid, cell_distances(grid[grid.rows//2, grid.columns//2]))
     img.show()
     
-    for cell in depth_first_iterator(grid[0,0]):
+    for c in depth_first_iterator(grid[0,0]):
+      #print(c)
       pass
 
 if __name__ == '__main__':
